@@ -1,0 +1,19 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "priority": 1000,
+  "package": "net.kamkeyke.heartpouch.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "heartpouch.refmap.json",
+  "mixins": [
+    "HeartstoneItemMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
