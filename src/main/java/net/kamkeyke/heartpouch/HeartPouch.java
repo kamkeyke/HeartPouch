@@ -19,7 +19,7 @@ public class HeartPouch
 
     public HeartPouch(FMLJavaModLoadingContext context)
     {
-        LOGGER.info("Greetings from the raccoon!");
+        raccoonGreetings();
         IEventBus modEventBus = context.getModEventBus();
 
         ModItems.register(modEventBus);
@@ -31,5 +31,12 @@ public class HeartPouch
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(ModNetworking::register);
+    }
+
+    private void raccoonGreetings(){
+        if(System.getProperty("raccoon.greeted") == null){
+            LOGGER.info("Greetings from the raccoon!");
+            System.setProperty("raccoon.greeted", "true");
+        }
     }
 }
