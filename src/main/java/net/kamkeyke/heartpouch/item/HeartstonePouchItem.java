@@ -1,6 +1,6 @@
 package net.kamkeyke.heartpouch.item;
 
-import net.kamkeyke.heartpouch.api.HeartPouchData;
+import net.kamkeyke.heartpouch.data.HeartPouchData;
 import net.mehvahdjukaar.heartstone.Heartstone;
 import net.mehvahdjukaar.heartstone.HeartstoneItem;
 import net.mehvahdjukaar.heartstone.NetworkHandler;

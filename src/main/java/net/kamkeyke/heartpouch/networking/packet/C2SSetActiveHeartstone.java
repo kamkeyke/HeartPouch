@@ -1,13 +1,15 @@
 package net.kamkeyke.heartpouch.networking.packet;
 
 import net.kamkeyke.heartpouch.HeartPouch;
-import net.kamkeyke.heartpouch.api.HeartPouchData;
+import net.kamkeyke.heartpouch.data.HeartPouchData;
 import net.kamkeyke.heartpouch.item.HeartstonePouchItem;
+import net.kamkeyke.raccooncore.networking.RaccoonNetworking;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -90,7 +92,7 @@ public class C2SSetActiveHeartstone {
 
     /**
      * Fallback "bruteforce" para localizar o pouch no jogador copiando o CompoundTag enviado.
-     * Roda por último, porque é relativamente custoso. Retorna o ItemStack encontrado (referência do server),
+     * Roda por último, porque é relativamente custoso. Retorna o ItemStack encontrado (referência do servidor),
      * ou {@link ItemStack}.EMPTY se não achou.
      */
     private static ItemStack findPouchByTagFallback(ServerPlayer player, CompoundTag tagToMatch) {
@@ -119,5 +121,15 @@ public class C2SSetActiveHeartstone {
         if (stack == null || stack.isEmpty() || !stack.hasTag()) return false;
         CompoundTag t = stack.getTag();
         return t.equals(tag);
+    }
+
+    public static void register(RaccoonNetworking network) {
+        network.registerPacket(
+                C2SSetActiveHeartstone.class,
+                C2SSetActiveHeartstone::new,
+                C2SSetActiveHeartstone::toBytes,
+                C2SSetActiveHeartstone::handle,
+                NetworkDirection.PLAY_TO_SERVER
+        );
     }
 }

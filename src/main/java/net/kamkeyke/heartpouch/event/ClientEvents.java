@@ -1,7 +1,7 @@
 package net.kamkeyke.heartpouch.event;
 
 import net.kamkeyke.heartpouch.HeartPouch;
-import net.kamkeyke.heartpouch.api.HeartPouchData;
+import net.kamkeyke.heartpouch.data.HeartPouchData;
 import net.kamkeyke.heartpouch.item.HeartstonePouchItem;
 import net.kamkeyke.heartpouch.networking.ModNetworking;
 import net.kamkeyke.heartpouch.networking.packet.C2SSetActiveHeartstone;
@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -65,7 +64,7 @@ public class ClientEvents {
             int next = Math.floorMod(current + dir, size);
 
             HeartPouchData.setActive(pouch, next);
-            ModNetworking.sendToServer(new C2SSetActiveHeartstone(source, slotIndex, next, -1, null));
+            ModNetworking.INSTANCE.sendToServer(new C2SSetActiveHeartstone(source, slotIndex, next, -1, null));
 
             CompoundTag activeTag = HeartPouchData.getActiveHeart(pouch);
             if(activeTag != null) {
@@ -128,7 +127,7 @@ public class ClientEvents {
             int next = Math.floorMod(current + dir, size);
 
             HeartPouchData.setActive(pouch, next);
-            ModNetworking.sendToServer(new C2SSetActiveHeartstone(source, slotIndex, next, windowId, pouchTag));
+            ModNetworking.INSTANCE.sendToServer(new C2SSetActiveHeartstone(source, slotIndex, next, windowId, pouchTag));
 
             player.playSound(
                     SoundEvents.UI_BUTTON_CLICK.get(),

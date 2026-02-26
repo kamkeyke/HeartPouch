@@ -1,6 +1,6 @@
 package net.kamkeyke.heartpouch.mixin;
 
-import net.kamkeyke.heartpouch.api.HeartPouchData;
+import net.kamkeyke.heartpouch.data.HeartPouchData;
 import net.kamkeyke.heartpouch.item.HeartstonePouchItem;
 import net.mehvahdjukaar.heartstone.HeartstoneItem;
 import net.minecraft.nbt.CompoundTag;

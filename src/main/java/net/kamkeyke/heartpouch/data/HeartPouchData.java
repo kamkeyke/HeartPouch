@@ -1,4 +1,4 @@
-package net.kamkeyke.heartpouch.api;
+package net.kamkeyke.heartpouch.data;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

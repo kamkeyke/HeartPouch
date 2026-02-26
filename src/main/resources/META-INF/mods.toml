@@ -27,8 +27,15 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
+modId="raccooncore"
+mandatory=true
+versionRange="${raccooncore_version_range}"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
 modId="heartstone"
 mandatory=true
 versionRange="${heartstone_version_range}"
-ordering="NONE"
+ordering="AFTER"
 side="BOTH"

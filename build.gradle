@@ -134,6 +134,9 @@ repositories {
     maven { // Autenticar a conta do minecraft no ambiente Dev
         url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
     }
+    maven {
+        url = 'https://jitpack.io'
+    }
 }
 
 dependencies {
@@ -151,15 +154,19 @@ dependencies {
     // Para ter a lib Mixin em tempo de execução
     implementation "org.spongepowered:mixin:0.8.5"
 
+    // RaccoonCore
+    implementation fg.deobf("com.github.kamkeyke:RaccoonCore:${raccooncore_version}")
+
     // DevAuth
     runtimeOnly fg.deobf("me.djtheredstoner:DevAuth-forge-latest:1.2.1")
+
+    // Heartstone
+    implementation fg.deobf("curse.maven:selene-499980:7541536")
+    implementation fg.deobf("curse.maven:heartstone-573152:6173171")
 
     //JEI
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-
-    implementation fg.deobf("curse.maven:heartstone-573152:6173171")
-    implementation fg.deobf("curse.maven:selene-499980:7541536")
 
     //In-game Account Switcher
     runtimeOnly fg.deobf("curse.maven:in-game-account-switcher-232676:5457030")
@@ -183,6 +190,7 @@ tasks.named('processResources', ProcessResources).configure {
             mod_authors: mod_authors,
             mod_description: mod_description,
             heartstone_version_range: heartstone_version_range,
+            raccooncore_version_range: raccooncore_version_range,
     ]
     inputs.properties replaceProperties
 
@@ -209,15 +217,15 @@ tasks.named('jar', Jar).configure {
     finalizedBy 'reobfJar'
 }
 
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing:
-// tasks.named('publish').configure {
-//     dependsOn 'reobfJar'
-// }
+tasks.named('publish').configure {dependsOn 'reobfJar'}
+tasks.withType(PublishToMavenLocal).configureEach { dependsOn 'reobfJar' }
+tasks.withType(PublishToMavenRepository).configureEach { dependsOn 'reobfJar' }
 
 // Example configuration to allow publishing using the maven-publish plugin
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
+            artifactId = base.archivesName.get()
             artifact jar
         }
     }
