@@ -157,19 +157,19 @@ dependencies {
     // RaccoonCore
     implementation fg.deobf("com.github.kamkeyke:RaccoonCore:${raccooncore_version}")
 
-    // DevAuth
-    runtimeOnly fg.deobf("me.djtheredstoner:DevAuth-forge-latest:1.2.1")
-
     // Heartstone
     implementation fg.deobf("curse.maven:selene-499980:7541536")
     implementation fg.deobf("curse.maven:heartstone-573152:6173171")
 
+    // DevAuth
+    // runtimeOnly fg.deobf("me.djtheredstoner:DevAuth-forge-latest:1.2.1")
+
     //JEI
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    // compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    // runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     //In-game Account Switcher
-    runtimeOnly fg.deobf("curse.maven:in-game-account-switcher-232676:5457030")
+    // runtimeOnly fg.deobf("curse.maven:in-game-account-switcher-232676:5457030")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
