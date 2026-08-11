@@ -21,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class HeartstonePouchItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, @NotNull InteractionHand pUsedHand) {
         ItemStack pouch = pPlayer.getItemInHand(pUsedHand);
 
         if (pLevel.isClientSide) {
@@ -65,7 +66,7 @@ public class HeartstonePouchItem extends Item {
     }
 
     @Override
-    public boolean overrideStackedOnOther(ItemStack pStack, Slot pSlot, ClickAction pAction, Player pPlayer) {
+    public boolean overrideStackedOnOther(@NotNull ItemStack pStack, Slot pSlot, @NotNull ClickAction pAction, @NotNull Player pPlayer) {
         ItemStack other = pSlot.getItem();
 
         if (pAction == ClickAction.SECONDARY && other.getItem() instanceof HeartstoneItem) {
@@ -81,7 +82,7 @@ public class HeartstonePouchItem extends Item {
     }
 
     @Override
-    public boolean overrideOtherStackedOnMe(ItemStack pStack, ItemStack pOther, Slot pSlot, ClickAction pAction, Player pPlayer, SlotAccess pAccess) {
+    public boolean overrideOtherStackedOnMe(@NotNull ItemStack pStack, @NotNull ItemStack pOther, @NotNull Slot pSlot, @NotNull ClickAction pAction, @NotNull Player pPlayer, @NotNull SlotAccess pAccess) {
         if (pAction == ClickAction.SECONDARY && pOther.isEmpty()) {
             CompoundTag removed = HeartPouchData.removeActive(pStack);
             if (removed == null) return false;
@@ -107,7 +108,7 @@ public class HeartstonePouchItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         int size = HeartPouchData.size(pStack);
         if(size <= 0){
             pTooltipComponents.add(Component.literal("Empty").withStyle(ChatFormatting.GRAY));

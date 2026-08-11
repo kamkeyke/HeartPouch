@@ -5,6 +5,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class HeartPouchData {
         ListTag list = getList(pouch);
         if (list.isEmpty()) return null;
 
-        int idx = clamp(getActive(pouch), 0, list.size() - 1);
+        int idx = Mth.clamp(getActive(pouch), 0, list.size() - 1);
         setActive(pouch, idx);
         return list.getCompound(idx);
     }
@@ -82,8 +83,6 @@ public class HeartPouchData {
         return removed;
     }
 
-
-
     public static String getHeartName(CompoundTag tag) {
         if (tag == null) return null;
 
@@ -103,12 +102,5 @@ public class HeartPouchData {
         }
 
         return "Heartstone";
-    }
-
-    public static int clamp(int value, int min, int max) {
-        return Math.min(max, Math.max(value, min));
-    }
-    public static double clamp(double value, double min, double max) {
-        return Math.min(max, Math.max(value, min));
     }
 }

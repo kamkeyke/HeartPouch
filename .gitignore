@@ -39,3 +39,4 @@ eclipse
 run
 run-data
 runs
+/src/generated/resources/.cache

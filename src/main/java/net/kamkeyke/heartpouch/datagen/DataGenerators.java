@@ -12,7 +12,6 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         RaccoonData data = new RaccoonData(event);
 
-        data.client(new ModItemModelProvider(data.output(), data.helper()));
         data.server(new ModRecipeProvider(data.output()));
     }
 }

@@ -18,6 +18,7 @@ public class CreativeModeTab {
 
     );
 
+    @SuppressWarnings("ConstantConditions")
     public static final RegistryObject<net.minecraft.world.item.CreativeModeTab> HEARTPOUCH_TAB = CREATIVE_MODE_TAB.register("heartpouch_tab",
             () -> net.minecraft.world.item.CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.HEARTSTONE_POUCH.get()))
                     .title(Component.translatable("creativetab.heartpouch.tab"))

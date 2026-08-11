@@ -123,6 +123,7 @@ mixin {
 }
 
 repositories {
+    mavenLocal()
     maven {
         // location of the maven that hosts JEI files since January 2023
         name = "Jared's maven"
@@ -131,9 +132,9 @@ repositories {
     maven {
         url = "https://cursemaven.com"
     }
-    maven { // Autenticar a conta do minecraft no ambiente Dev
-        url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
-    }
+    //maven { // Autenticar a conta do minecraft no ambiente Dev
+    //    url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
+    //}
     maven {
         url = 'https://jitpack.io'
     }
@@ -156,6 +157,7 @@ dependencies {
 
     // RaccoonCore
     implementation fg.deobf("com.github.kamkeyke:RaccoonCore:${raccooncore_version}")
+    // implementation fg.deobf("net.kamkeyke.raccooncore:raccooncore-1.20.1-forge:${raccooncore_version_local}")
 
     // Heartstone
     implementation fg.deobf("curse.maven:selene-499980:7541536")
@@ -165,8 +167,9 @@ dependencies {
     // runtimeOnly fg.deobf("me.djtheredstoner:DevAuth-forge-latest:1.2.1")
 
     //JEI
-    // compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    // runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     //In-game Account Switcher
     // runtimeOnly fg.deobf("curse.maven:in-game-account-switcher-232676:5457030")

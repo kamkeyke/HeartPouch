@@ -10,6 +10,7 @@ logoFile="icon.png"
 authors="${mod_authors}"
 displayTest="MATCH_VERSION"
 description='''${mod_description}'''
+issueTrackerURL="https://github.com/kamkeyke/HeartPouch/issues"
 
 ## Dependencies
 [[dependencies.${mod_id}]]

@@ -5,6 +5,8 @@ import net.kamkeyke.heartpouch.data.HeartPouchData;
 import net.kamkeyke.heartpouch.item.HeartstonePouchItem;
 import net.kamkeyke.heartpouch.networking.ModNetworking;
 import net.kamkeyke.heartpouch.networking.packet.C2SSetActiveHeartstone;
+import net.kamkeyke.heartpouch.registry.ModItems;
+import net.kamkeyke.raccooncore.util.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -14,9 +16,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -143,5 +147,16 @@ public class ClientEvents {
     @Mod.EventBusSubscriber(modid = HeartPouch.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents{
 
+        @SubscribeEvent
+        public static void registerItemColors(RegisterColorHandlersEvent.Item event){
+            int defaultColor = ColorUtils.toRgb(DyeColor.PINK);
+
+            event.register((
+                    (pStack, pTintIndex) ->
+                            pTintIndex == 0 ? ColorUtils.getColor(pStack, defaultColor) : -1
+                    ),
+                    ModItems.HEARTSTONE_POUCH.get()
+            );
+        }
     }
 }
